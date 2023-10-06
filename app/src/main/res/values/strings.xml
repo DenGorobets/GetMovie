@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GetMovie</string>
+    <string name="splash_animation">Splash animation</string>
 </resources>
