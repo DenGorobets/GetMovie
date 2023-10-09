@@ -1,19 +1,23 @@
-package com.example.lesson1.data.pojo_tmdb.now_playing
+package com.den.gorobets.getmovie.dto.now_playing
 
-import kotlinx.serialization.ExperimentalSerializationApi
+import androidx.annotation.Keep
+import com.example.lesson1.data.pojo_tmdb.now_playing.Dates
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NowPlayingListMovieDTO @OptIn(ExperimentalSerializationApi::class) constructor(
+@Keep
+data class NowPlayingListMovieDTO(
 
-    val dates: Dates,
-    val page: Int,
-    val resultNowPlayingMovies: List<ResultNowPlayingMovie>,
+    val dates: Dates? = null,
+    val page: Int? = null,
+
+    @SerialName("results")
+    val resultNowPlayingMovies: List<ResultNowPlayingMovie>? = null,
 
     @SerialName("total_pages")
-    val totalPages: Int,
+    val totalPages: Int? = null,
 
     @SerialName("total_results")
-    val totalResults: Int
+    val totalResults: Int? = null
 )

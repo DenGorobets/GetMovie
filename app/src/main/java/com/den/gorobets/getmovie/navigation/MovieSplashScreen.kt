@@ -9,6 +9,7 @@ object MovieSplashScreen : Screen {
 
     @Composable
     override fun Content() {
+
         GetMovieTheme {
             MovieSplashScreenView()
         }

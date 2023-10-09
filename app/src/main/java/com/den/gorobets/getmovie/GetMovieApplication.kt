@@ -8,6 +8,7 @@ import com.den.gorobets.getmovie.api.RetrofitClient.instanceRetrofit
 import com.den.gorobets.getmovie.api.RetrofitClient.provideForecastApi
 import com.den.gorobets.getmovie.repo.MainRepository
 import com.den.gorobets.getmovie.repo.MainRepositoryImpl
+import com.den.gorobets.getmovie.viewmodel.HomeViewModel
 import com.den.gorobets.getmovie.viewmodel.MovieDescriptionViewModel
 import com.den.gorobets.getmovie.viewmodel.PersonDescriptionViewModel
 import com.den.gorobets.getmovie.viewmodel.SearchMovieViewModel
@@ -21,9 +22,9 @@ import org.koin.dsl.module
 open class GetMovieApplication : Application() {
 
     private val repoModule by lazy {
-
         module {
             single<MainRepository> { MainRepositoryImpl(get()) }
+            viewModel { HomeViewModel(get()) }
             viewModel { SearchMovieViewModel(get()) }
             viewModel { MovieDescriptionViewModel(get()) }
             viewModel { PersonDescriptionViewModel(get()) }
@@ -32,7 +33,6 @@ open class GetMovieApplication : Application() {
     }
 
     private val networkModule by lazy {
-
         module {
             factory { AuthInterceptor() }
             factory { Dispatcher().addDispatcher() }

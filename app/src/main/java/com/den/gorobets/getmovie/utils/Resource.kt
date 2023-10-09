@@ -1,4 +1,6 @@
-package com.example.lesson1.data.utils
+package com.den.gorobets.getmovie.utils
+
+import com.example.lesson1.data.utils.Status
 
 data class Resource<out T>(
     val status: Status,

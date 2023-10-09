@@ -1,4 +1,47 @@
 <resources>
     <string name="app_name">GetMovie</string>
     <string name="splash_animation">Splash animation</string>
+
+    <string name="bottom_navigation_home" translatable="false">Home</string>
+    <string name="bottom_navigation_profile" translatable="false">Profile</string>
+    <string name="text_card_image" translatable="false">Card image</string>
+    <string name="text_default_image" translatable="false">Default image</string>
+    <string name="text_check_image_person" translatable="false">person</string>
+
+    <string name="search">Search</string>
+    <string name="search_string">Search movies, series</string>
+    <string name="text_released_date">Released date</string>
+    <string name="text_country">Country</string>
+    <string name="text_genre">Genre</string>
+    <string name="text_director">Director</string>
+    <string name="text_actors">Actors</string>
+    <string name="text_actor">Actor</string>
+    <string name="text_sound_master">Sound master</string>
+    <string name="text_series">Series</string>
+    <string name="text_website">Website</string>
+    <string name="text_plot">Description</string>
+    <string name="text_runtime">Runtime</string>
+    <string name="text_imdb_rating">Imdb Rating</string>
+    <string name="text_movie">Movie</string>
+    <string name="text_producer">Producer</string>
+    <string name="text_birthday">Birthday</string>
+    <string name="text_deathday">Deathday</string>
+    <string name="text_place_of_birth">Place of birth</string>
+    <string name="text_biography">Biography</string>
+    <string name="text_similar">Similar</string>
+    <string name="text_trailer">Trailer</string>
+    <string name="text_actors_work">Worked on</string>
+    <string name="text_created_by">Created by</string>
+    <string name="text_minute" translatable="false">min</string>
+    <string name="text_for_check_trailer" translatable="false">Trailer</string>
+    <string name="text_budget">Budget</string>
+    <string name="transition_shimmer_animation">Transition shimmer animation</string>
+    <string name="translate_shimmer_animation">Translate shimmer animation</string>
+    <string name="transition_alpha">Transition alpha</string>
+    <string name="transition_animation">Transition animation</string>
+    <string name="splash_background">Splash background</string>
+    <string name="splash_logo">Splash logo</string>
+    <string name="icon_history">Icon history</string>
+    <string name="close_button">Close button</string>
+    <string name="now_playing_in_cinema">Now playing in cinema</string>
 </resources>

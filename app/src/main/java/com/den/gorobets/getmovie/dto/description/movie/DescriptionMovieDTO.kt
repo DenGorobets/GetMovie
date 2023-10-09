@@ -1,5 +1,6 @@
 package com.den.gorobets.getmovie.dto.description.movie
 
+import androidx.annotation.Keep
 import com.den.gorobets.getmovie.dto.description.Credits
 import com.den.gorobets.getmovie.dto.description.Genre
 import com.den.gorobets.getmovie.dto.description.Images
@@ -12,6 +13,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Keep
 data class DescriptionMovieDTO(
 
     @SerialName("belongs_to_collection")
