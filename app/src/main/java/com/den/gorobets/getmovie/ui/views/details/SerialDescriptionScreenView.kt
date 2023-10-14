@@ -1,19 +1,19 @@
-package com.den.gorobets.getmovie.ui.views
+package com.den.gorobets.getmovie.ui.views.details
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.den.gorobets.getmovie.ui.theme.GetMovieTheme
 
 @Composable
-fun MovieDescriptionScreenView() {
+fun SerialDescriptionScreenView() {
 
 }
 
 
 @Preview(showBackground = true)
 @Composable
-fun MovieDescriptionScreenPreview() {
+fun SerialDescriptionScreenPreview() {
     GetMovieTheme {
-        MovieDescriptionScreenView()
+        SerialDescriptionScreenView()
     }
 }

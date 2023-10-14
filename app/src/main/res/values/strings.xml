@@ -44,4 +44,11 @@
     <string name="icon_history">Icon history</string>
     <string name="close_button">Close button</string>
     <string name="now_playing_in_cinema">Now playing in cinema</string>
+    <string name="now_in_trends">Now in trends</string>
+    <string name="new_tv_series">New TV series</string>
+    <string name="new_movies">New movies</string>
+    <string name="see_all">See all</string>
+    <string name="broken_icon">Broken icon</string>
+    <string name="can_t_load_data">Can\'t load data</string>
+    <string name="retry">Retry</string>
 </resources>
