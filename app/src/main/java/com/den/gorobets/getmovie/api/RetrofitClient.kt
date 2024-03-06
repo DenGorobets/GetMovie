@@ -4,7 +4,6 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 
@@ -20,16 +19,6 @@ object RetrofitClient {
         ignoreUnknownKeys = true
         coerceInputValues = true
     }
-
-    fun provideOkHttpClient(authInterceptor: AuthInterceptor) =
-        OkHttpClient.Builder()
-            .addInterceptor(authInterceptor)
-            .addInterceptor(
-                HttpLoggingInterceptor().setLevel(
-                    HttpLoggingInterceptor.Level.BODY
-                )
-            )
-            .build()
 
     fun instanceRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
