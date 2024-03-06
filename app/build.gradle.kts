@@ -56,10 +56,10 @@ dependencies {
 
     // Voyager navigation
     val voyagerVersion = "1.0.0-rc06"
-    implementation("cafe.adriel.voyager:voyager-koin:$voyagerVersion")
     implementation("cafe.adriel.voyager:voyager-androidx:$voyagerVersion")
     implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
     implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+    implementation("cafe.adriel.voyager:voyager-livedata:$voyagerVersion")
 
     // Serialization library
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
@@ -80,11 +80,21 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.5.0")
     implementation("io.insert-koin:koin-androidx-compose:3.4.5")
 
+    // Coil library
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // Extended icons library
+    implementation("androidx.compose.material:material-icons-extended:1.5.3")
+
+    // Foundation library
+    implementation("androidx.compose.foundation:foundation:1.5.3")
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0-rc01")
     implementation(platform("androidx.compose:compose-bom:2023.10.00"))
     implementation("androidx.compose.ui:ui:1.5.3")
+    implementation("androidx.compose.ui:ui-util:1.5.3")
     implementation("androidx.compose.ui:ui-graphics:1.5.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
     implementation("androidx.compose.material3:material3:1.1.2")

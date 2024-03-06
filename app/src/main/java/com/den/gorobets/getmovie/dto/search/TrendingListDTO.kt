@@ -1,12 +1,16 @@
-package com.example.lesson1.data.pojo_tmdb.search
+package com.den.gorobets.getmovie.dto.search
 
+import androidx.annotation.Keep
+import com.example.lesson1.data.pojo_tmdb.search.Result
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Keep
 data class TrendingListDTO(
+
     val page: Int,
-    val results: List<Result>,
+    val results: List<Result>? = null,
 
     @SerialName("total_pages")
     val totalPages: Int,
@@ -14,18 +18,3 @@ data class TrendingListDTO(
     @SerialName("total_results")
     val totalResults: Int
 )
-
-enum class MediaType(val value: String) {
-    Movie("Movie"),
-    Person("Person"),
-    Tv("Series");
-
-    companion object {
-        fun fromValue(value: String): MediaType = when (value) {
-            "movie" -> Movie
-            "person" -> Person
-            "tv" -> Tv
-            else -> throw IllegalArgumentException()
-        }
-    }
-}

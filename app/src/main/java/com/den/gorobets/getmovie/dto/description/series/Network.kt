@@ -1,9 +1,11 @@
 package com.den.gorobets.getmovie.dto.description.series
 
+import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Keep
 data class Network(
 
     val id: Int,

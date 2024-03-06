@@ -1,11 +1,13 @@
 package com.den.gorobets.getmovie.dto.description.series
 
+import androidx.annotation.Keep
 import com.den.gorobets.getmovie.dto.description.VideosResult
 import com.den.gorobets.getmovie.dto.description.movie.OriginalLanguage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Keep
 data class SimilarResult(
 
     val adult: Boolean,

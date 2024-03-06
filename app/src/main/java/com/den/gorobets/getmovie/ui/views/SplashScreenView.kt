@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.den.gorobets.getmovie.R
-import com.den.gorobets.getmovie.navigation.HomeScreen
+import com.den.gorobets.getmovie.navigation.SearchScreen
 import com.den.gorobets.getmovie.ui.theme.GetMovieTheme
 
 @Composable
@@ -42,7 +42,7 @@ fun MovieSplashScreenView() {
         targetValue = if (startAnimation) 1f else 0f,
         animationSpec = FloatTweenSpec(3000, easing = EaseInBounce),
         finishedListener = {
-            navigator.replaceAll(HomeScreen)
+            navigator.replaceAll(SearchScreen) //TODO: replace with HomeScreen
         }, label = stringResource(R.string.splash_animation)
     )
 
@@ -64,7 +64,7 @@ fun SplashScreen(alpha: Float) {
                 .fillMaxSize()
                 .blur(3.dp),
             painter = painterResource(id = R.drawable.splash),
-            contentDescription = "",
+            contentDescription = stringResource(R.string.splash_background),
             contentScale = ContentScale.Crop,
         )
         Box(
@@ -86,7 +86,7 @@ fun SplashScreen(alpha: Float) {
                 else
                     R.drawable.black_movies_24
             ),
-            contentDescription = "",
+            contentDescription = stringResource(R.string.splash_logo),
         )
     }
 }

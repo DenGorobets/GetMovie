@@ -1,19 +1,20 @@
 package com.den.gorobets.getmovie.ui.views
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.den.gorobets.getmovie.ui.theme.GetMovieTheme
+import cafe.adriel.voyager.navigator.Navigator
+import com.den.gorobets.getmovie.viewmodel.HomeViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreenView() {
+fun HomeScreenView(navigator: Navigator, viewModel: HomeViewModel = koinViewModel()) {
+
 
 }
 
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    GetMovieTheme {
-        HomeScreenView()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun HomeScreenPreview() {
+//    GetMovieTheme {
+//        HomeScreenView()
+//    }
+//}

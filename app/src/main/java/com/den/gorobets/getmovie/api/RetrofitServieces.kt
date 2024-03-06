@@ -2,12 +2,12 @@ package com.den.gorobets.getmovie.api
 
 import com.den.gorobets.getmovie.dto.description.movie.DescriptionMovieDTO
 import com.den.gorobets.getmovie.dto.description.series.DescriptionSeriesDTO
+import com.den.gorobets.getmovie.dto.now_playing.NowPlayingListMovieDTO
+import com.den.gorobets.getmovie.dto.search.TrendingListDTO
 import com.example.lesson1.data.pojo_tmdb.discover.DiscoverListMovieDTO
 import com.example.lesson1.data.pojo_tmdb.discover.DiscoverListTVDTO
-import com.example.lesson1.data.pojo_tmdb.now_playing.NowPlayingListMovieDTO
 import com.example.lesson1.data.pojo_tmdb.person.DescriptionPersonDTO
 import com.example.lesson1.data.pojo_tmdb.search.SearchListMovieDTO
-import com.example.lesson1.data.pojo_tmdb.search.TrendingListDTO
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
@@ -82,7 +82,7 @@ interface RetrofitServices {
 
     @GET("trending/all/{time_window}")
     suspend fun getTrending(
-        @Path("time_window") personId: String = "week", //6h, day, week
+        @Path("time_window") timeWindow: String = "week", //6h, day, week
         @Query(LANGUAGE_AND_REGION) language: String, //set region and language "en-US"
         @Header(AUTHORIZATION) authorization: String = TMBD_API_KEY
     ): TrendingListDTO

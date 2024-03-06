@@ -1,11 +1,12 @@
 package com.example.lesson1.data.pojo_tmdb.discover
 
-import kotlinx.serialization.ExperimentalSerializationApi
+import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DiscoverListTVDTO @OptIn(ExperimentalSerializationApi::class) constructor(
+@Keep
+data class DiscoverListTVDTO(
 
     val page: Int,
     val results: List<ResultDiscoverTV>,

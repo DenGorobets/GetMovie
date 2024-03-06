@@ -1,9 +1,11 @@
 package com.example.lesson1.data.pojo_tmdb.person
 
+import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Keep
 data class DescriptionPersonDTO(
 
     val adult: Boolean,
