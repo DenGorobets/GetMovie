@@ -18,8 +18,9 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import java.util.Locale
 
-open class GetMovieApplication : Application() {
+class GetMovieApplication : Application() {
 
     private val repoModule by lazy {
         module {
@@ -45,10 +46,20 @@ open class GetMovieApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        val defaultLocale = Locale.getDefault()
+        val defaultLanguage = defaultLocale.language
+
         startKoin {
             androidLogger()
             androidContext(this@GetMovieApplication)
             modules(networkModule, repoModule)
         }
+        DEFAULT_LANGUAGE = defaultLanguage
+    }
+
+    companion object {
+        var TIME_WINDOW = "week" //6h, day, week
+        var DEFAULT_LANGUAGE: String = "en-US"
+        var DEFAULT_ADULT: Boolean = false
     }
 }

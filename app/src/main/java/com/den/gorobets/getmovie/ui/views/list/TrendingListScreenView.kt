@@ -1,19 +1,19 @@
-package com.den.gorobets.getmovie.ui.views
+package com.den.gorobets.getmovie.ui.views.list
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.den.gorobets.getmovie.ui.theme.GetMovieTheme
 
 @Composable
-fun PersonDescriptionScreenView() {
+fun TrendingListScreenView() {
 
 }
 
 
 @Preview(showBackground = true)
 @Composable
-fun PersonDescriptionScreenPreview() {
+fun TrendingListScreenPreview() {
     GetMovieTheme {
-        PersonDescriptionScreenView()
+        TrendingListScreenView()
     }
 }

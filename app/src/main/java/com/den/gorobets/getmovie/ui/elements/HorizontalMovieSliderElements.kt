@@ -1,10 +1,12 @@
-package com.den.gorobets.getmovie.ui
+package com.den.gorobets.getmovie.ui.elements
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -31,30 +34,39 @@ import com.den.gorobets.getmovie.ui.elements.shared.image.ImageUrlPainter
 
 @Composable
 fun <T> HorizontalMovieScrollerItem(
-    label: String,
-    movieList: List<T>,
-    itemContent: @Composable (T) -> Unit
+    modifier: Modifier = Modifier,
+    title: String,
+    data: List<T>,
+    itemContent: @Composable (T) -> Unit,
+    addButton: @Composable (() -> Unit)? = null
 ) {
 
-    if (movieList.isNotEmpty()) {
+    if (data.isNotEmpty()) {
 
         val listState = rememberLazyListState()
 
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
-                .animateContentSize(spring())
         ) {
-
-            Spacer(modifier = Modifier.padding(4.dp))
-            LabelText(label = label)
+            Spacer(modifier = Modifier.padding(8.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                LabelText(label = title)
+                addButton?.invoke()
+            }
             LazyRow(
                 state = listState,
                 contentPadding = PaddingValues(horizontal = 8.dp)
             ) {
-                itemsIndexed(movieList) { _, index ->
-                    itemContent(index)
+                itemsIndexed(data) { _, index ->
+                    itemContent.invoke(index)
                 }
             }
         }
@@ -62,12 +74,9 @@ fun <T> HorizontalMovieScrollerItem(
 }
 
 @Composable
-fun LabelText(modifier: Modifier = Modifier, label: String) {
+fun LabelText(label: String) {
 
     Text(
-        modifier = modifier
-            .padding(horizontal = 16.dp)
-            .padding(top = 8.dp, bottom = 4.dp),
         text = label,
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold
@@ -89,7 +98,7 @@ fun MovieScrollerItem(
         Card(
             modifier = Modifier
                 .animateContentSize(spring())
-                .clickable { onClick() },
+                .clickable { onClick.invoke() },
             colors = CardDefaults.cardColors(Color.Transparent),
             shape = RoundedCornerShape(0.dp)
         ) {
@@ -98,7 +107,8 @@ fun MovieScrollerItem(
                     .fillMaxSize()
                     .aspectRatio(10f / 16f)
                     .clip(RoundedCornerShape(8.dp)),
-                image = poster
+                image = poster,
+                withAnimation = false
             )
         }
         Spacer(modifier = Modifier.padding(4.dp))

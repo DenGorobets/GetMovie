@@ -1,4 +1,4 @@
-package com.den.gorobets.getmovie.ui.views
+package com.den.gorobets.getmovie.ui.views.general
 
 import androidx.compose.animation.core.EaseInBounce
 import androidx.compose.animation.core.FloatTweenSpec
@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.den.gorobets.getmovie.R
-import com.den.gorobets.getmovie.navigation.SearchScreen
+import com.den.gorobets.getmovie.navigation.general_screen.HomeScreen
 import com.den.gorobets.getmovie.ui.theme.GetMovieTheme
 
 @Composable
@@ -42,7 +42,7 @@ fun MovieSplashScreenView() {
         targetValue = if (startAnimation) 1f else 0f,
         animationSpec = FloatTweenSpec(3000, easing = EaseInBounce),
         finishedListener = {
-            navigator.replaceAll(SearchScreen) //TODO: replace with HomeScreen
+            navigator.replaceAll(HomeScreen)
         }, label = stringResource(R.string.splash_animation)
     )
 

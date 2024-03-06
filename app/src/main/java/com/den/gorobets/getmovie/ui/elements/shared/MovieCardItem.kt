@@ -58,7 +58,8 @@ fun MovieCardItem(
             ImageUrlPainter(
                 modifier = Modifier.fillMaxSize(),
                 image = movieData.selectImageResource() ?: "",
-                isPerson = resultType
+                isPerson = resultType,
+                withAnimation = false
             )
             Column(
                 verticalArrangement = Arrangement.Bottom

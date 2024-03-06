@@ -50,8 +50,7 @@ fun ImageUrlPainter(
     val painter = rememberAsyncImagePainter(
         ImageRequest.Builder(LocalContext.current)
             .data(TMBD_IMAGE_BASE_URL + image)
-//            .crossfade(true)
-//            .crossfade(450)
+            .crossfade(450)
             .build(),
     )
 
