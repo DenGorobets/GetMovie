@@ -1,7 +1,6 @@
 package com.den.gorobets.getmovie.dto.now_playing
 
 import androidx.annotation.Keep
-import com.example.lesson1.data.pojo_tmdb.now_playing.Dates
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

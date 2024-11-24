@@ -32,7 +32,7 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MoviePageLoadAnimation(modifier: Modifier = Modifier) {
+fun MoviePagerLoadAnimation(modifier: Modifier = Modifier) {
 
     val itemsCount = 10
 
@@ -64,7 +64,7 @@ fun MoviePageLoadAnimation(modifier: Modifier = Modifier) {
         flingBehavior = fling,
         key = null,
         pageNestedScrollConnection = PagerDefaults.pageNestedScrollConnection(
-            Orientation.Horizontal
+            pagerState, Orientation.Horizontal
         ),
         pageContent = { page ->
             Column(

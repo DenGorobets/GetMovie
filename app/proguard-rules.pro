@@ -21,3 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 -keep interface * { @retrofit2.http.* public *** *(...); }
+-keep,allowobfuscation,allowshrinking class retrofit2.Response

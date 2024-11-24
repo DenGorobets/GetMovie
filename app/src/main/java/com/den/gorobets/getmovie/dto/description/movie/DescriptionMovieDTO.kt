@@ -24,7 +24,7 @@ data class DescriptionMovieDTO(
     val imdbID: String? = null,
 
     @SerialName("original_language")
-    val originalLanguage: OriginalLanguage? = null,
+    val originalLanguage: String? = null,
 
     @SerialName("original_title")
     val originalTitle: String? = null,

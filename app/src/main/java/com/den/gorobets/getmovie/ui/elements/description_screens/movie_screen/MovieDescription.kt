@@ -1,0 +1,45 @@
+package com.den.gorobets.getmovie.ui.elements.description_screens.movie_screen
+
+import android.graphics.Bitmap
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import cafe.adriel.voyager.navigator.Navigator
+import com.den.gorobets.getmovie.utils.data.ColorizedTheme
+import com.den.gorobets.getmovie.utils.data.ReceivedDescriptionData
+
+@Composable
+fun MovieDescription(
+    data: ReceivedDescriptionData,
+    paddingValues: PaddingValues,
+    navigator: Navigator,
+    themeColors: ColorizedTheme,
+    receivedBitmap: MutableState<Bitmap?>
+) {
+
+    TopMovieDescriptionItems(
+        data = data.topPartData,
+        themeBackColor = themeColors.colorizedBackColor,
+        themeTextColors = listOf(
+            themeColors.colorizedTitleTextColor, themeColors.colorizedBodyTextColor
+        ),
+        bitmapFromPoster = receivedBitmap
+    )
+    BottomMovieDescriptionItems(
+        navigator = navigator,
+        data = data.bottomPartData,
+        themeTextColors = listOf(
+            themeColors.colorizedTitleTextColor, themeColors.colorizedBodyTextColor
+        )
+    )
+    Spacer(
+        Modifier
+            .padding(bottom = paddingValues.calculateBottomPadding())
+            .drawBehind {
+                drawRect(themeColors.colorizedBackColor)
+            })
+}

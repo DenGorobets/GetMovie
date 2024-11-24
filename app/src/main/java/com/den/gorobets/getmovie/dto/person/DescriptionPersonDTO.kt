@@ -1,4 +1,4 @@
-package com.example.lesson1.data.pojo_tmdb.person
+package com.den.gorobets.getmovie.dto.person
 
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
@@ -39,17 +39,3 @@ data class DescriptionPersonDTO(
     @SerialName("movie_credits")
     val movieCredits: MovieCredits? = null
 )
-
-enum class OriginalLanguage(val value: String) {
-
-    En("en"),
-    Es("es");
-
-    companion object {
-        fun fromValue(value: String): OriginalLanguage = when (value) {
-            "en" -> En
-            "es" -> Es
-            else -> throw IllegalArgumentException()
-        }
-    }
-}

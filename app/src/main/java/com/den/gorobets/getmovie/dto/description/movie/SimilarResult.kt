@@ -19,7 +19,7 @@ data class SimilarResult(
     val id: Int,
 
     @SerialName("original_language")
-    val originalLanguage: OriginalLanguage? = null,
+    val originalLanguage: String? = null,
 
     @SerialName("original_title")
     val originalTitle: String? = null,

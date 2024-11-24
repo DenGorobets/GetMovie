@@ -14,7 +14,8 @@ fun ScrollableSearchBar(
     scrollUpState: Boolean,
     searchFieldText: MutableState<String>,
 ) {
-    val position by animateFloatAsState(if (scrollUpState) -250f else 0f, label = "")
+
+    val position by animateFloatAsState(if (scrollUpState) -350f else 0f, label = "")
 
     SearchField(
         modifier = modifier.graphicsLayer { translationY = (position) },

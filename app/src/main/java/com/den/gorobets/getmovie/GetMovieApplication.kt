@@ -6,6 +6,7 @@ import com.den.gorobets.getmovie.api.Dispatcher
 import com.den.gorobets.getmovie.api.OkHttpClient
 import com.den.gorobets.getmovie.api.RetrofitClient.instanceRetrofit
 import com.den.gorobets.getmovie.api.RetrofitClient.provideForecastApi
+import com.den.gorobets.getmovie.database.SharedPreferencesManager
 import com.den.gorobets.getmovie.repo.MainRepository
 import com.den.gorobets.getmovie.repo.MainRepositoryImpl
 import com.den.gorobets.getmovie.viewmodel.HomeViewModel
@@ -27,7 +28,7 @@ class GetMovieApplication : Application() {
             single<MainRepository> { MainRepositoryImpl(get()) }
             viewModel { HomeViewModel(get()) }
             viewModel { SearchMovieViewModel(get()) }
-            viewModel { MovieDescriptionViewModel(get()) }
+            viewModel { MovieDescriptionViewModel(get(), get(), get()) }
             viewModel { PersonDescriptionViewModel(get()) }
             viewModel { SeriesDescriptionViewModel(get()) }
         }
@@ -43,6 +44,12 @@ class GetMovieApplication : Application() {
         }
     }
 
+    private val databaseModule by lazy {
+        module {
+            single { SharedPreferencesManager(androidContext()) }
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -52,13 +59,13 @@ class GetMovieApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@GetMovieApplication)
-            modules(networkModule, repoModule)
+            modules(networkModule, repoModule, databaseModule)
         }
         DEFAULT_LANGUAGE = defaultLanguage
     }
 
     companion object {
-        var TIME_WINDOW = "week" //6h, day, week
+        var TIME_WINDOW: String = "week" //6h, day, week
         var DEFAULT_LANGUAGE: String = "en-US"
         var DEFAULT_ADULT: Boolean = false
     }

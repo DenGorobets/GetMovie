@@ -5,10 +5,10 @@ import com.den.gorobets.getmovie.dto.description.series.DescriptionSeriesDTO
 import com.den.gorobets.getmovie.dto.now_playing.NowPlayingListMovieDTO
 import com.den.gorobets.getmovie.dto.search.TrendingListDTO
 import com.den.gorobets.getmovie.utils.Resource
-import com.example.lesson1.data.pojo_tmdb.discover.DiscoverListMovieDTO
-import com.example.lesson1.data.pojo_tmdb.discover.DiscoverListTVDTO
-import com.example.lesson1.data.pojo_tmdb.person.DescriptionPersonDTO
-import com.example.lesson1.data.pojo_tmdb.search.SearchListMovieDTO
+import com.den.gorobets.getmovie.dto.discover.DiscoverListMovieDTO
+import com.den.gorobets.getmovie.dto.discover.DiscoverListTVDTO
+import com.den.gorobets.getmovie.dto.person.DescriptionPersonDTO
+import com.den.gorobets.getmovie.dto.search.SearchListMovieDTO
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {

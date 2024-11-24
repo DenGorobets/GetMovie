@@ -7,25 +7,25 @@ import com.den.gorobets.getmovie.dto.description.movie.DescriptionMovieDTO
 import com.den.gorobets.getmovie.dto.description.series.DescriptionSeriesDTO
 import com.den.gorobets.getmovie.dto.now_playing.NowPlayingListMovieDTO
 import com.den.gorobets.getmovie.dto.search.TrendingListDTO
-import com.example.lesson1.data.pojo_tmdb.discover.DiscoverListMovieDTO
-import com.example.lesson1.data.pojo_tmdb.discover.DiscoverListTVDTO
-import com.example.lesson1.data.pojo_tmdb.person.DescriptionPersonDTO
-import com.example.lesson1.data.pojo_tmdb.search.SearchListMovieDTO
+import com.den.gorobets.getmovie.dto.discover.DiscoverListMovieDTO
+import com.den.gorobets.getmovie.dto.discover.DiscoverListTVDTO
+import com.den.gorobets.getmovie.dto.person.DescriptionPersonDTO
+import com.den.gorobets.getmovie.dto.search.SearchListMovieDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val APPEND_TO_RESPONSE = "append_to_response"
-const val APPEND_STRING = "videos,images,credits,similar,translations"
-const val ADULT_INCLUDE = "include_adult"
-const val LANGUAGE_AND_REGION = "language"
-const val CURRENT_PAGE = "page"
-const val SORT_BY = "sort_by"
-const val SORT_TYPE =
+const val APPEND_TO_RESPONSE: String = "append_to_response"
+const val APPEND_STRING: String = "videos,images,credits,similar,translations"
+const val ADULT_INCLUDE: String = "include_adult"
+const val LANGUAGE_AND_REGION: String = "language"
+const val CURRENT_PAGE: String = "page"
+const val SORT_BY: String = "sort_by"
+const val SORT_TYPE: String =
     "popularity.desc" //popularity.asc, revenue.*, primary_release_date.*, vote_average.*, vote_count.*,
-const val AUTHORIZATION = "Authorization"
+const val AUTHORIZATION: String = "Authorization"
 
 interface RetrofitServices {
 
