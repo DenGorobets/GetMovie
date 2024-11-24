@@ -51,4 +51,21 @@
     <string name="broken_icon">Broken icon</string>
     <string name="can_t_load_data">Can\'t load data</string>
     <string name="retry">Retry</string>
+    <string name="back">Back</string>
+    <string name="data_format">#.#</string>
+    <string name="animation_body_text_color_change">Animation body text color change</string>
+    <string name="animation_title_text_color_change">Animation title text color change</string>
+    <string name="animation_background_color_change">Animation background color change</string>
+    <string name="share_button">Share button</string>
+    <string name="save_button">Save button</string>
+    <string name="animated_icon_change">Animated icon change</string>
+    <string name="start_save_icon_state">Start save icon state</string>
+    <string name="end_save_icon_state">End save icon state</string>
+    <string name="hey_look_what_i_find_in_app_that_s_movie">Hey, look what I find in %1$s app!\nThat`s %2$s movie.\n</string>
+    <string name="imdb_prefix_site">https://www.imdb.com/title/%1$s</string>
+    <string name="tap_to_see_all">View\nmore</string>
+    <string name="use_colorized_theme">Use colorized theme?</string>
+    <string name="turn_on">Turn on</string>
+    <string name="colorized_theme_enabled">Colorized theme enabled. Changes will be seen on the next time. You can disable theme in settings.</string>
+    <string name="refresh_icon">Refresh icon</string>
 </resources>

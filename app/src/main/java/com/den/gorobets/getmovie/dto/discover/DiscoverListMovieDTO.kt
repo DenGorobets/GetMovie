@@ -1,4 +1,4 @@
-package com.example.lesson1.data.pojo_tmdb.discover
+package com.den.gorobets.getmovie.dto.discover
 
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName

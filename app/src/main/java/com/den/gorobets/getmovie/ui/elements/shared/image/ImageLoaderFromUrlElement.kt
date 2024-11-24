@@ -1,5 +1,6 @@
 package com.den.gorobets.getmovie.ui.elements.shared.image
 
+import android.graphics.drawable.Drawable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -15,10 +16,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
@@ -38,45 +43,53 @@ import com.den.gorobets.getmovie.R
 import com.den.gorobets.getmovie.api.TMBD_IMAGE_BASE_URL
 import java.lang.Float.min
 
-
 @Composable
 fun ImageUrlPainter(
     modifier: Modifier = Modifier,
     image: String,
     withAnimation: Boolean = true,
-    isPerson: Boolean = false
+    isPerson: Boolean = false,
+    returnDrawable: ((Drawable) -> Unit)? = null
 ) {
 
     val painter = rememberAsyncImagePainter(
         ImageRequest.Builder(LocalContext.current)
             .data(TMBD_IMAGE_BASE_URL + image)
-            .crossfade(450)
+            .crossfade(700)
             .build(),
     )
-
-    val state = painter.state
+    val state by remember {
+        derivedStateOf { painter.state }
+    }
     val transition by animateFloatAsState(
         targetValue = if (state is AsyncImagePainter.State.Success) 1f else 0f,
-        label = stringResource(
-            R.string.transition_animation
-        )
+        label = stringResource(R.string.transition_animation)
     )
     val transitionAlpha by animateFloatAsState(
         targetValue = if (state is AsyncImagePainter.State.Loading) 1f else 0f,
-        label = stringResource(
-            R.string.transition_alpha
-        )
+        label = stringResource(R.string.transition_alpha)
     )
+    val shimmerVisibility by remember {
+        derivedStateOf {
+            transitionAlpha > 0f
+        }
+    }
     val matrix = ColorMatrix()
     matrix.setToSaturation(transition)
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize(),
-    ) {
+    LaunchedEffect(state) {
+        (state as? AsyncImagePainter.State.Success)
+            ?.let { successState ->
+                val drawable = successState.result.drawable
+                returnDrawable?.invoke(drawable)
+            }
+    }
 
-        if (image != "") {
-            ShimmerLoading(modifier.alpha(transitionAlpha))
+    Box(modifier = Modifier.fillMaxSize()) {
+
+        if (image.isNotBlank()) {
+            if (shimmerVisibility)
+                ShimmerLoading(modifier.alpha(transitionAlpha))
             Image(
                 modifier = if (withAnimation)
                     modifier
@@ -167,6 +180,9 @@ fun ShimmerLoading(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(brush = brush)
+            .drawBehind {
+                drawRect(brush)
+            }
+//            .background(brush = brush)
     )
 }

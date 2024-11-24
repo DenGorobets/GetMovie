@@ -1,6 +1,7 @@
-package com.example.lesson1.data.pojo_tmdb.person
+package com.den.gorobets.getmovie.dto.person
 
 import androidx.annotation.Keep
+import com.den.gorobets.getmovie.dto.person.Cast
 import kotlinx.serialization.Serializable
 
 @Serializable

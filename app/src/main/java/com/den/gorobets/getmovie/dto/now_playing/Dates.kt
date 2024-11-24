@@ -1,4 +1,4 @@
-package com.example.lesson1.data.pojo_tmdb.now_playing
+package com.den.gorobets.getmovie.dto.now_playing
 
 import androidx.annotation.Keep
 import kotlinx.serialization.Serializable

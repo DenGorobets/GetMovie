@@ -2,7 +2,6 @@ package com.den.gorobets.getmovie.dto.description.series
 
 import androidx.annotation.Keep
 import com.den.gorobets.getmovie.dto.description.VideosResult
-import com.den.gorobets.getmovie.dto.description.movie.OriginalLanguage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,7 +20,7 @@ data class SimilarResult(
     val id: Int,
 
     @SerialName("original_language")
-    val originalLanguage: OriginalLanguage? = null,
+    val originalLanguage: String? = null,
 
     @SerialName("original_title")
     val originalTitle: String? = null,

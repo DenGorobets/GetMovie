@@ -32,7 +32,7 @@ import com.den.gorobets.getmovie.extensions.selectTitleResource
 import com.den.gorobets.getmovie.extensions.selectTypeResource
 import com.den.gorobets.getmovie.extensions.selectYearResource
 import com.den.gorobets.getmovie.ui.elements.shared.image.ImageUrlPainter
-import com.example.lesson1.data.pojo_tmdb.search.Result
+import com.den.gorobets.getmovie.dto.search.Result
 
 @Composable
 fun MovieCardItem(

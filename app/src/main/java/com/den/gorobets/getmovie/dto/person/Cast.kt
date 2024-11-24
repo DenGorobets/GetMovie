@@ -1,4 +1,4 @@
-package com.example.lesson1.data.pojo_tmdb.person
+package com.den.gorobets.getmovie.dto.person
 
 import androidx.annotation.Keep
 import kotlinx.serialization.SerialName
@@ -19,7 +19,7 @@ data class Cast(
     val id: Int,
 
     @SerialName("original_language")
-    val originalLanguage: OriginalLanguage? = null,
+    val originalLanguage: String? = null,
 
     @SerialName("original_title")
     val originalTitle: String? = null,

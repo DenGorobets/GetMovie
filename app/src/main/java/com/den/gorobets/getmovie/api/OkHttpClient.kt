@@ -10,7 +10,7 @@ class OkHttpClient {
     fun provideOkHttpClient(
         authInterceptor: AuthInterceptor,
         dispatcher: Dispatcher
-    ) =
+    ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .dispatcher(dispatcher)
