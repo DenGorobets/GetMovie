@@ -4,19 +4,20 @@ import androidx.compose.runtime.Stable
 import com.den.gorobets.getmovie.GetMovieApplication
 import com.den.gorobets.getmovie.dto.description.Genre
 import com.den.gorobets.getmovie.dto.description.ProductionCountry
+import com.den.gorobets.getmovie.dto.description.ScrollerItemData
 import com.den.gorobets.getmovie.dto.description.Videos
 import com.den.gorobets.getmovie.dto.description.movie.Cast
 import java.text.DecimalFormat
 
 @Stable
-data class DescriptionBottomPartData(
+data class MovieBottomPartData(
     val runtime: Int,
     val voteAverage: Double?,
     val releaseDate: String,
     val genres: List<Genre>,
     val productionCountries: List<ProductionCountry>,
     val crew: List<Cast>,
-    val similar: List<MovieSeriesItem>,
+    val similar: List<ScrollerItemData>,
     val overview: String,
     val homepage: String,
     val videoPath: Videos?

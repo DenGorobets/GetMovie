@@ -8,10 +8,11 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.den.gorobets.getmovie.dto.discover.DiscoverListMovieDTO
 import com.den.gorobets.getmovie.dto.discover.DiscoverListTVDTO
 import com.den.gorobets.getmovie.dto.search.TrendingListDTO
-import com.den.gorobets.getmovie.ui.elements.HorizontalMovieScrollerItem
+import com.den.gorobets.getmovie.extensions.toMovieScrollerData
+import com.den.gorobets.getmovie.ui.elements.HorizontalScrollerItem
 import com.den.gorobets.getmovie.ui.elements.loaders.HorizontalMovieLoadAnimation
 import com.den.gorobets.getmovie.utils.ResponseEvents
-import com.den.gorobets.getmovie.utils.data.MovieSeriesItem
+import com.den.gorobets.getmovie.utils.data.MovieSeriesPersonItem
 
 @Composable
 fun ListLoader(
@@ -37,12 +38,12 @@ fun ListLoader(
             val data = responseEvents.result
 
             data?.let { result ->
-                val movies = mutableListOf<MovieSeriesItem>()
+                val movies = mutableListOf<MovieSeriesPersonItem>()
 
                 when (result) {
                     is DiscoverListMovieDTO -> {
                         result.results?.map { movieResult ->
-                            movies += MovieSeriesItem(
+                            movies += MovieSeriesPersonItem(
                                 poster = movieResult.posterPath.orEmpty(),
                                 title = movieResult.title.orEmpty(),
                                 imdbId = movieResult.id
@@ -52,7 +53,7 @@ fun ListLoader(
 
                     is DiscoverListTVDTO -> {
                         result.results.map { tvResult ->
-                            movies += MovieSeriesItem(
+                            movies += MovieSeriesPersonItem(
                                 poster = tvResult.posterPath.orEmpty(),
                                 title = tvResult.name.orEmpty(),
                                 imdbId = tvResult.id,
@@ -63,7 +64,7 @@ fun ListLoader(
 
                     is TrendingListDTO -> {
                         result.results?.map { trendingResult ->
-                            movies += MovieSeriesItem(
+                            movies += MovieSeriesPersonItem(
                                 poster = trendingResult.posterPath.orEmpty(),
                                 title = trendingResult.title ?: trendingResult.name.orEmpty(),
                                 imdbId = trendingResult.id,
@@ -73,10 +74,10 @@ fun ListLoader(
                     }
                 }
 
-                HorizontalMovieScrollerItem(
+                HorizontalScrollerItem(
                     modifier = modifier,
                     label = stringResource(title),
-                    data = movies,
+                    data = movies.toMovieScrollerData(),
                     moreButton = {
                         navigator.push(moreButtonScreen)
                     },

@@ -34,6 +34,7 @@ data class SimilarResult(
     @SerialName("release_date")
     val releaseDate: String? = null,
 
+    @SerialName("name")
     val title: String? = null,
     val video: List<VideosResult>? = null,
 

@@ -9,7 +9,7 @@ import com.den.gorobets.getmovie.dto.discover.DiscoverListTVDTO
 import com.den.gorobets.getmovie.dto.now_playing.NowPlayingListMovieDTO
 import com.den.gorobets.getmovie.dto.search.TrendingListDTO
 import com.den.gorobets.getmovie.navigation.description_screen.MovieDescriptionScreen
-import com.den.gorobets.getmovie.navigation.description_screen.SerialDescriptionScreen
+import com.den.gorobets.getmovie.navigation.description_screen.SeriesDescriptionScreen
 import com.den.gorobets.getmovie.navigation.list_screen.DiscoverMovieListScreen
 import com.den.gorobets.getmovie.navigation.list_screen.DiscoverTVListScreen
 import com.den.gorobets.getmovie.navigation.list_screen.TrendingListScreen
@@ -38,7 +38,7 @@ fun HomeScreenItems(
         moreButtonScreen = TrendingListScreen,
         navigationIdSelector = { index, isSeries ->
             if (isSeries)
-                SerialDescriptionScreen(index)
+                SeriesDescriptionScreen(index)
             else
                 MovieDescriptionScreen(index)
         }
@@ -51,7 +51,7 @@ fun HomeScreenItems(
         title = R.string.new_tv_series,
         moreButtonScreen = DiscoverMovieListScreen,
         navigationIdSelector = { index, _ ->
-            SerialDescriptionScreen(index)
+            SeriesDescriptionScreen(index)
         }
     )
 

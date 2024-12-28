@@ -11,10 +11,11 @@ import androidx.compose.ui.draw.drawBehind
 import cafe.adriel.voyager.navigator.Navigator
 import com.den.gorobets.getmovie.utils.data.ColorizedTheme
 import com.den.gorobets.getmovie.utils.data.ReceivedMovieDescriptionData
+import com.den.gorobets.getmovie.utils.data.ReceivedSeriesDescriptionData
 
 @Composable
-fun MovieDescription(
-    data: ReceivedMovieDescriptionData,
+fun SeriesDescription(
+    data: ReceivedSeriesDescriptionData,
     paddingValues: PaddingValues,
     navigator: Navigator,
     themeColors: ColorizedTheme,
@@ -29,7 +30,7 @@ fun MovieDescription(
         ),
         bitmapFromPoster = receivedBitmap
     )
-    BottomMovieDescriptionItems(
+    BottomSeriesDescriptionItems(
         navigator = navigator,
         data = data.bottomPartData,
         themeTextColors = listOf(

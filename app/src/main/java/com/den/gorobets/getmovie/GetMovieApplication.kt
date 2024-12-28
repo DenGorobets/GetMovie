@@ -14,10 +14,12 @@ import com.den.gorobets.getmovie.viewmodel.MovieDescriptionViewModel
 import com.den.gorobets.getmovie.viewmodel.PersonDescriptionViewModel
 import com.den.gorobets.getmovie.viewmodel.SearchMovieViewModel
 import com.den.gorobets.getmovie.viewmodel.SeriesDescriptionViewModel
+import com.den.gorobets.getmovie.viewmodel.SeriesSeasonDescriptionViewModel
+import com.den.gorobets.getmovie.viewmodel.SeriesSeasonsListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import java.util.Locale
 
@@ -30,7 +32,9 @@ class GetMovieApplication : Application() {
             viewModel { SearchMovieViewModel(get()) }
             viewModel { MovieDescriptionViewModel(get(), get(), get()) }
             viewModel { PersonDescriptionViewModel(get()) }
-            viewModel { SeriesDescriptionViewModel(get()) }
+            viewModel { SeriesDescriptionViewModel(get(), get(), get()) }
+            viewModel { SeriesSeasonsListViewModel(get(), get(), get()) }
+            viewModel { SeriesSeasonDescriptionViewModel(get(), get(), get()) }
         }
     }
 
