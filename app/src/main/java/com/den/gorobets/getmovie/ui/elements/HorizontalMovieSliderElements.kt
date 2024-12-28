@@ -35,15 +35,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.den.gorobets.getmovie.R
+import com.den.gorobets.getmovie.dto.description.ScrollerItemData
 import com.den.gorobets.getmovie.ui.elements.shared.image.ImageUrlPainter
 import com.den.gorobets.getmovie.ui.theme.GetMovieTheme
-import com.den.gorobets.getmovie.utils.data.MovieSeriesItem
 
 @Composable
-fun HorizontalMovieScrollerItem(
+fun HorizontalScrollerItem(
     modifier: Modifier = Modifier,
     label: String,
-    data: List<MovieSeriesItem>,
+    data: List<ScrollerItemData>,
     textColor: List<Color> = listOf(
         MaterialTheme.colorScheme.onBackground,
         MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
@@ -51,7 +51,6 @@ fun HorizontalMovieScrollerItem(
     navigationId: ((Int, Int) -> Unit)? = null,
     moreButton: (() -> Unit)? = null
 ) {
-
     val listState = rememberLazyListState()
 
     if (!data.isNullOrEmpty())
@@ -60,7 +59,6 @@ fun HorizontalMovieScrollerItem(
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
         ) {
-            Spacer(modifier = Modifier.padding(8.dp))
             BigTitleText(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 label = label,
@@ -71,17 +69,31 @@ fun HorizontalMovieScrollerItem(
                 contentPadding = PaddingValues(horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                itemsIndexed(items = data) { count, (poster, title, imdbId, isSeries, randomId) ->
-                    MovieScrollerItem(
-                        poster,
-                        title,
-                        textColor = textColor[0]
-                    ) {
-                        navigationId?.invoke(count, imdbId)
+                itemsIndexed(items = data) { count, item ->
+                    when (item) {
+                        is ScrollerItemData.MovieSeries -> {
+                            ScrollerItem(
+                                poster = item.item.poster,
+                                name = item.item.title,
+                                textColor = textColor[0]
+                            ) {
+                                navigationId?.invoke(count, item.item.imdbId)
+                            }
+                        }
+
+                        is ScrollerItemData.Season -> {
+                            ScrollerItem(
+                                poster = item.item.posterPath ?: "",
+                                name = item.item.name ?: "Season ${item.item.seasonNumber}",
+                                textColor = textColor[0]
+                            ) {
+                                navigationId?.invoke(count, item.item.imdbId)
+                            }
+                        }
                     }
                 }
                 item {
-                    MoreLazyRowButtonItem(textColor = textColor[0]) {
+                    MoreButtonScrollerItem(textColor = textColor[0]) {
                         moreButton?.invoke()
                     }
                 }
@@ -102,7 +114,7 @@ fun BigTitleText(modifier: Modifier = Modifier, textColor: Color, label: String)
 }
 
 @Composable
-fun MovieScrollerItem(
+fun ScrollerItem(
     poster: String,
     name: String,
     textColor: Color = MaterialTheme.colorScheme.onBackground,
@@ -144,7 +156,7 @@ fun MovieScrollerItem(
 }
 
 @Composable
-fun MoreLazyRowButtonItem(
+fun MoreButtonScrollerItem(
     textColor: Color,
     onClick: () -> Unit
 ) {
@@ -179,6 +191,6 @@ fun MoreLazyRowButtonItem(
 @Composable
 fun MoreLazyRowButtonItemPreview() {
     GetMovieTheme {
-        MoreLazyRowButtonItem(textColor = MaterialTheme.colorScheme.onBackground) {}
+        MoreButtonScrollerItem(textColor = MaterialTheme.colorScheme.onBackground) {}
     }
 }

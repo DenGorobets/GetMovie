@@ -17,6 +17,9 @@ data class DescriptionSeriesDTO(
 
     val adult: Boolean,
 
+    @SerialName("imdb_id")
+    val imdbID: String? = null,
+
     @SerialName("backdrop_path")
     val backdropPath: String? = null,
 

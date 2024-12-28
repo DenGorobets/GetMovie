@@ -110,7 +110,7 @@ fun MoviePager(
         pageNestedScrollConnection = PagerDefaults.pageNestedScrollConnection(
             pagerState, Orientation.Horizontal
         ),
-        beyondBoundsPageCount = 5,
+        beyondViewportPageCount = 5,
         pageSize = PageSize.Fill,
         flingBehavior = fling,
         key = null,

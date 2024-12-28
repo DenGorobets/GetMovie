@@ -1,12 +1,14 @@
 package com.den.gorobets.getmovie.ui.elements.description_screens.movie_screen
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,12 +17,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.Navigator
 import com.den.gorobets.getmovie.R
 import com.den.gorobets.getmovie.extensions.openWebSite
 import com.den.gorobets.getmovie.extensions.replaceOnDot
-import com.den.gorobets.getmovie.navigation.description_screen.MovieDescriptionScreen
+import com.den.gorobets.getmovie.navigation.description_screen.SeriesDescriptionScreen
+import com.den.gorobets.getmovie.navigation.description_screen.SeriesSeasonDescriptionScreen
 import com.den.gorobets.getmovie.navigation.list_screen.DiscoverMovieListScreen
+import com.den.gorobets.getmovie.navigation.list_screen.SeriesSeasonsListScreen
 import com.den.gorobets.getmovie.ui.elements.BigTitleText
 import com.den.gorobets.getmovie.ui.elements.HorizontalScrollerItem
 import com.den.gorobets.getmovie.ui.elements.YouTubePlugin
@@ -28,38 +33,52 @@ import com.den.gorobets.getmovie.ui.elements.description_screens.ClickableTextDe
 import com.den.gorobets.getmovie.ui.elements.description_screens.RatingsMovieItem
 import com.den.gorobets.getmovie.ui.elements.description_screens.TextDescription
 import com.den.gorobets.getmovie.ui.elements.description_screens.TextDescriptionItem
-import com.den.gorobets.getmovie.utils.data.MovieBottomPartData
+import com.den.gorobets.getmovie.utils.data.SeriesBottomPartData
 
 @Composable
-fun BottomMovieDescriptionItems(
+fun BottomSeriesDescriptionItems(
     navigator: Navigator,
-    data: MovieBottomPartData,
+    data: SeriesBottomPartData,
     themeTextColors: List<Color>,
 ) {
 
     val context = LocalContext.current
+    val scrollState = rememberScrollState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(16.dp)
+                .horizontalScroll(scrollState),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             RatingsMovieItem(
-                data.correctRuntime,
-                stringResource(R.string.text_runtime),
-                textColor = themeTextColors
+                data.firstAirDate.replaceOnDot(),
+                stringResource(R.string.text_first_episode),
+                textColor = themeTextColors,
+                topTextSize = 14.sp
             )
             RatingsMovieItem(
                 data.formatVote,
                 stringResource(R.string.text_imdb_rating),
                 textColor = themeTextColors
             )
+            RatingsMovieItem(
+                data.correctAvrRuntime,
+                stringResource(R.string.text_first_episode),
+                textColor = themeTextColors
+            )
+            RatingsMovieItem(
+                data.lastEpisodeToAir.replaceOnDot(),
+                stringResource(R.string.text_last_air_date),
+                textColor = themeTextColors,
+                topTextSize = 14.sp
+            )
         }
-        TextDescription(
-            headerText = stringResource(R.string.text_released_date),
-            description = (data.releaseDate).replaceOnDot(),
+        TextDescriptionItem(
+            headerText = "${stringResource(R.string.text_series_status)}: ",
+            descriptionText = listOf(data.seriesStatus),
             textColor = themeTextColors
         )
         TextDescriptionItem(
@@ -88,6 +107,18 @@ fun BottomMovieDescriptionItems(
         )
         HorizontalScrollerItem(
             modifier = Modifier,
+            label = stringResource(R.string.text_seasons),
+            data = data.seasonsList,
+            textColor = themeTextColors,
+            moreButton = {
+                navigator.push(SeriesSeasonsListScreen(data.seasonsList))
+            },
+            navigationId = { _, index ->
+                navigator.push(SeriesSeasonDescriptionScreen(index))
+            }
+        )
+        HorizontalScrollerItem(
+            modifier = Modifier,
             label = stringResource(R.string.text_similar),
             data = data.similar,
             textColor = themeTextColors,
@@ -95,7 +126,7 @@ fun BottomMovieDescriptionItems(
                 navigator.push(DiscoverMovieListScreen)
             },
             navigationId = { _, index ->
-                navigator.replace(MovieDescriptionScreen(index))
+                navigator.replace(SeriesDescriptionScreen(index))
             }
         )
         ClickableTextDescriptionItem(

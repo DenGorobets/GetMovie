@@ -20,55 +20,57 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import cafe.adriel.voyager.navigator.Navigator
 import com.den.gorobets.getmovie.R
+import com.den.gorobets.getmovie.dto.description.series.SerialSeasonItem
 import com.den.gorobets.getmovie.extensions.shareItem
 import com.den.gorobets.getmovie.extensions.toMovieScrollerData
+import com.den.gorobets.getmovie.extensions.toSeasonScrollerData
 import com.den.gorobets.getmovie.ui.elements.ColorizedColumn
-import com.den.gorobets.getmovie.ui.elements.description_screens.movie_screen.MovieDescription
+import com.den.gorobets.getmovie.ui.elements.description_screens.movie_screen.SeriesDescription
 import com.den.gorobets.getmovie.ui.elements.error.FailureScreen
 import com.den.gorobets.getmovie.ui.elements.loaders.MovieDescriptionLoadAnimation
 import com.den.gorobets.getmovie.ui.elements.top_bars.DescriptionTopBar
 import com.den.gorobets.getmovie.utils.data.DescriptionTopPartData
-import com.den.gorobets.getmovie.utils.data.MovieBottomPartData
 import com.den.gorobets.getmovie.utils.data.MovieSeriesPersonItem
-import com.den.gorobets.getmovie.utils.data.ReceivedMovieDescriptionData
-import com.den.gorobets.getmovie.utils.ui_state.MovieScreenUiState
-import com.den.gorobets.getmovie.viewmodel.MovieDescriptionViewModel
+import com.den.gorobets.getmovie.utils.data.ReceivedSeriesDescriptionData
+import com.den.gorobets.getmovie.utils.data.SeriesBottomPartData
+import com.den.gorobets.getmovie.utils.ui_state.SeriesScreenUiState
+import com.den.gorobets.getmovie.viewmodel.SeriesDescriptionViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieDescriptionScreenView(
+fun SeriesDescriptionScreenView(
     navigator: Navigator,
     movieId: Int,
-    viewModel: MovieDescriptionViewModel = koinViewModel { parametersOf(movieId) }
+    viewModel: SeriesDescriptionViewModel = koinViewModel { parametersOf(movieId) }
 ) {
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val verticalScrollState = rememberScrollState()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val shareMovieData = remember { mutableStateOf<List<String>>(emptyList()) }
-    val saveMovie = remember { mutableStateOf(false) }
+    val shareSeriesData = remember { mutableStateOf<List<String>>(emptyList()) }
+    val saveSeries = remember { mutableStateOf(false) }
     val bitmapFromPoster = remember { mutableStateOf<Bitmap?>(null) }
 
-    val viewState by viewModel.movieScreenViewState.collectAsState()
+    val viewState by viewModel.seriesScreenViewState.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             DescriptionTopBar(
                 scrollBehavior = scrollBehavior,
-                isItemStarred = saveMovie,
+                isItemStarred = saveSeries,
                 navigationButton = {
                     navigator.pop()
                 },
                 shareButton = {
                     val presentText = context.getString(
-                        R.string.hey_look_what_i_find_in_app_that_s_movie,
+                        R.string.hey_look_what_i_find_in_app_that_s_series,
                         context.getString(R.string.app_name),
-                        shareMovieData.value.getOrNull(1).orEmpty()
-                    ) + shareMovieData.value.getOrNull(0).orEmpty()
+                        shareSeriesData.value.getOrNull(1).orEmpty()
+                    ) + shareSeriesData.value.getOrNull(0).orEmpty()
                     context.shareItem(presentText)
                 }
             )
@@ -93,12 +95,12 @@ fun MovieDescriptionScreenView(
                 viewModel.setSnackbarVisibility()
             }
         ) { themeColors ->
-            when (val state = viewState.movieScreenUiState) {
-                is MovieScreenUiState.Loading -> {
+            when (val state = viewState.seriesScreenUiState) {
+                is SeriesScreenUiState.Loading -> {
                     MovieDescriptionLoadAnimation(paddingValues)
                 }
 
-                is MovieScreenUiState.Error -> {
+                is SeriesScreenUiState.Error -> {
                     FailureScreen(
                         retryCallback = {
                             viewModel.retryFetchDescription()
@@ -106,11 +108,11 @@ fun MovieDescriptionScreenView(
                     )
                 }
 
-                is MovieScreenUiState.Success -> {
+                is SeriesScreenUiState.Success -> {
                     state.description?.let { description ->
-                        shareMovieData.value = listOf(
+                        shareSeriesData.value = listOf(
                             stringResource(R.string.imdb_prefix_site, description.imdbID.orEmpty()),
-                            description.title.orEmpty()
+                            description.name.orEmpty()
                         )
 
                         val similarMovie = description.similar?.results?.map { result ->
@@ -121,30 +123,50 @@ fun MovieDescriptionScreenView(
                             )
                         } ?: emptyList()
 
+                        val seasonItemList = description.seasons?.map { result ->
+                            SerialSeasonItem(
+                                airDate = result.airDate,
+                                episodeCount = result.episodeCount,
+                                name = result.name.orEmpty(),
+                                overview = result.overview,
+                                posterPath = result.posterPath.orEmpty(),
+                                seasonNumber = result.seasonNumber,
+                                imdbId = result.id
+                            )
+                        } ?: emptyList()
+
                         val descriptionTopPartData = DescriptionTopPartData(
                             poster = description.posterPath.orEmpty(),
                             backdrop = description.backdropPath ?: description.posterPath.orEmpty(),
-                            title = description.title.orEmpty(),
+                            title = description.name.orEmpty(),
                             tagline = description.tagline.orEmpty()
                         )
 
-                        val movieBottomPartData = MovieBottomPartData(
-                            runtime = description.runtime,
+                        val seriesBottomPartData = SeriesBottomPartData(
+                            numberOfEpisodes = description.numberOfEpisodes,
+                            numberOfSeasons = description.numberOfSeasons,
+                            seriesStatus = description.status.orEmpty(),
+                            inProduction = description.inProduction ?: false,
+                            episodeRuntime = description.episodeRunTime ?: emptyList(),
+                            firstAirDate = description.firstAirDate.orEmpty(),
+                            lastAirDate = description.lastAirDate.orEmpty(),
+                            nextEpisodeToAir = description.nextEpisodeToAir?.airDate.orEmpty(),
+                            lastEpisodeToAir = description.lastEpisodeToAir?.airDate.orEmpty(),
                             voteAverage = description.voteAverage,
-                            releaseDate = description.releaseDate.orEmpty(),
                             genres = description.genres,
                             productionCountries = description.productionCountries ?: emptyList(),
                             crew = description.credits?.crew ?: emptyList(),
                             similar = similarMovie.toMovieScrollerData(),
+                            seasonsList = seasonItemList.toSeasonScrollerData(),
                             overview = description.overview.orEmpty(),
                             homepage = description.homepage.orEmpty(),
                             videoPath = description.videos
                         )
 
-                        MovieDescription(
-                            data = ReceivedMovieDescriptionData(
+                        SeriesDescription(
+                            data = ReceivedSeriesDescriptionData(
                                 descriptionTopPartData,
-                                movieBottomPartData
+                                seriesBottomPartData
                             ),
                             paddingValues = paddingValues,
                             navigator = navigator,
@@ -157,3 +179,11 @@ fun MovieDescriptionScreenView(
         }
     }
 }
+
+//@Preview(showBackground = true)
+//@Composable
+//fun SerialDescriptionScreenPreview() {
+//    GetMovieTheme {
+//        SerialDescriptionScreenView()
+//    }
+//}

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Stable
 import java.util.UUID
 
 @Stable
-data class MovieSeriesItem(
+data class MovieSeriesPersonItem(
     val poster: String,
     val title: String,
     val imdbId: Int,

@@ -59,7 +59,7 @@ fun MoviePagerLoadAnimation(modifier: Modifier = Modifier) {
         contentPadding = PaddingValues(
             horizontal = (LocalConfiguration.current.screenWidthDp / 2 - 100).dp
         ),
-        beyondBoundsPageCount = 5,
+        beyondViewportPageCount = 5,
         pageSize = PageSize.Fill,
         flingBehavior = fling,
         key = null,

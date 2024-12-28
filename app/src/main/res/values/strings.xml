@@ -62,10 +62,16 @@
     <string name="start_save_icon_state">Start save icon state</string>
     <string name="end_save_icon_state">End save icon state</string>
     <string name="hey_look_what_i_find_in_app_that_s_movie">Hey, look what I find in %1$s app!\nThat`s %2$s movie.\n</string>
+    <string name="hey_look_what_i_find_in_app_that_s_series">Hey, look what I find in %1$s app!\nThat`s %2$s series.\n</string>
     <string name="imdb_prefix_site">https://www.imdb.com/title/%1$s</string>
     <string name="tap_to_see_all">View\nmore</string>
     <string name="use_colorized_theme">Use colorized theme?</string>
     <string name="turn_on">Turn on</string>
     <string name="colorized_theme_enabled">Colorized theme enabled. Changes will be seen on the next time. You can disable theme in settings.</string>
     <string name="refresh_icon">Refresh icon</string>
+    <string name="text_seasons">Seasons</string>
+    <string name="text_first_episode">"First Aired "</string>
+    <string name="text_last_air_date">Latest Episode</string>
+    <string name="text_series_status">Series status</string>
+    <string name="text_series_last_episode">Latest Episode</string>
 </resources>

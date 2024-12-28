@@ -12,13 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
 fun RatingsMovieItem(
     textTop: String,
     textBottom: String,
-    textColor: List<Color?>
+    textColor: List<Color?>,
+    topTextSize: TextUnit = 20.sp,
+    bottomTextSize: TextUnit = 12.sp,
 ) {
 
     if (textTop.isNotEmpty())
@@ -32,7 +35,7 @@ fun RatingsMovieItem(
                     )
                 ),
                 text = textTop,
-                fontSize = 20.sp,
+                fontSize = topTextSize,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 color = textColor[0] ?: MaterialTheme.colorScheme.onBackground
@@ -46,7 +49,7 @@ fun RatingsMovieItem(
                 ),
                 text = textBottom,
                 color = textColor[1] ?: MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
-                fontSize = 12.sp,
+                fontSize = bottomTextSize,
                 textAlign = TextAlign.Center
             )
         }
